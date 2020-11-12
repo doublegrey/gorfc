@@ -1054,11 +1054,11 @@ func (conn *Connection) Alive() bool {
 func (conn *Connection) Close() (err error) {
 	var errorInfo C.RFC_ERROR_INFO
 	if conn.alive {
-		conn.alive = false
 		rc := C.RfcCloseConnection(conn.handle, &errorInfo)
 		if rc != C.RFC_OK {
 			return rfcError(errorInfo, "Connection could not be closed")
 		}
+		conn.alive = false
 	}
 	return
 }
