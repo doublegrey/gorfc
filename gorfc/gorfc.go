@@ -117,21 +117,21 @@ func rfcError(errorInfo C.RFC_ERROR_INFO, format string, a ...interface{}) *RfcE
 	return &RfcError{fmt.Sprintf(format, a...), wrapError(&errorInfo)}
 }
 
-// GoRfcError is returned by gorfc
-type GoRfcError struct {
+// Error is returned by gorfc
+type Error struct {
 	Description string
 	GoError     error
 }
 
-func (err GoRfcError) Error() string {
+func (err Error) Error() string {
 	if err.GoError != nil {
 		return fmt.Sprintf("GORFC error: %s | %s", err.Description, err.GoError.Error())
 	}
 	return fmt.Sprintf("GORFC error: %s", err.Description)
 }
 
-func goRfcError(description string, goerror error) *GoRfcError {
-	return &GoRfcError{description, goerror}
+func goRfcError(description string, goerror error) *Error {
+	return &Error{description, goerror}
 }
 
 //################################################################################
