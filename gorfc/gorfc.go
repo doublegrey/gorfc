@@ -403,12 +403,11 @@ type ConnectionAttributes map[string]string
 
 func wrapConnectionAttributes(attributes C.RFC_ATTRIBUTES, strip bool) (connAttr ConnectionAttributes, err error) {
 	connAttr = make(map[string]string)
-
 	dest, err := nWrapString(&attributes.dest[0], 64, strip)
 	host, err := nWrapString(&attributes.host[0], 100, strip)
 	partnerHost, err := nWrapString(&attributes.partnerHost[0], 100, strip)
 	sysNumber, err := nWrapString(&attributes.sysNumber[0], 2, strip)
-	sysId, err := nWrapString(&attributes.sysId[0], 8, strip)
+	sysID, err := nWrapString(&attributes.sysId[0], 8, strip)
 	client, err := nWrapString(&attributes.client[0], 3, strip)
 	user, err := nWrapString(&attributes.user[0], 12, strip)
 	language, err := nWrapString(&attributes.language[0], 2, strip)
@@ -422,7 +421,7 @@ func wrapConnectionAttributes(attributes C.RFC_ATTRIBUTES, strip bool) (connAttr
 	rel, err := nWrapString(&attributes.rel[0], 4, strip)
 	partnerRel, err := nWrapString(&attributes.partnerRel[0], 4, strip)
 	kernelRel, err := nWrapString(&attributes.kernelRel[0], 4, strip)
-	cpicConvId, err := nWrapString(&attributes.cpicConvId[0], 8, strip)
+	cpicConvID, err := nWrapString(&attributes.cpicConvId[0], 8, strip)
 	progName, err := nWrapString(&attributes.progName[0], 128, strip)
 	partnerBytesPerChar, err := nWrapString(&attributes.partnerBytesPerChar[0], 1, strip)
 	partnerSystemCodepage, err := nWrapString(&attributes.partnerSystemCodepage[0], 4, strip)
@@ -434,7 +433,7 @@ func wrapConnectionAttributes(attributes C.RFC_ATTRIBUTES, strip bool) (connAttr
 	connAttr["host"] = host
 	connAttr["partnerHost"] = partnerHost
 	connAttr["sysNumber"] = sysNumber
-	connAttr["sysId"] = sysId
+	connAttr["sysId"] = sysID
 	connAttr["client"] = client
 	connAttr["user"] = user
 	connAttr["language"] = language
@@ -448,7 +447,7 @@ func wrapConnectionAttributes(attributes C.RFC_ATTRIBUTES, strip bool) (connAttr
 	connAttr["rel"] = rel
 	connAttr["partnerRel"] = partnerRel
 	connAttr["kernelRel"] = kernelRel
-	connAttr["cpicConvId"] = cpicConvId
+	connAttr["cpicConvId"] = cpicConvID
 	connAttr["progName"] = progName
 	connAttr["partnerBytesPerChar"] = partnerBytesPerChar
 	connAttr["partnerSystemCodepage"] = partnerSystemCodepage
@@ -956,7 +955,7 @@ func wrapResult(funcDesc C.RFC_FUNCTION_DESC_HANDLE, container C.RFC_FUNCTION_HA
 //# NW RFC LIB FUNCTIONALITY                                                     #
 //################################################################################
 
-// GetNWRFCLibVersion returnd the major version, minor version and patchlevel of the SAP NetWeaver RFC library used.
+// GetNWRFCLibVersion returns the major version, minor version and patchlevel of the SAP NetWeaver RFC library used.
 func GetNWRFCLibVersion() (major, minor, patchlevel uint) {
 	var cmaj, cmin, cpatch C.uint
 	C.RfcGetVersion(&cmaj, &cmin, &cpatch)
