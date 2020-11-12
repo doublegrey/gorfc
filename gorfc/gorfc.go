@@ -999,11 +999,6 @@ func connectionFinalizer(conn *Connection) {
 func ConnectionFromParams(connectionParams ConnectionParameters) (conn *Connection, err error) {
 	conn = new(Connection)
 
-	conn.handle = nil
-	conn.rstrip = true
-	conn.returnImportParams = false
-	conn.alive = false
-
 	runtime.SetFinalizer(conn, connectionFinalizer)
 	conn.paramCount = C.uint(len(connectionParams))
 	conn.connectionParams = connectionParams
